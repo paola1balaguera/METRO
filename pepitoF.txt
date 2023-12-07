@@ -1,0 +1,161 @@
+use filtro;
+
+CREATE TABLE zona (
+    id_zona INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE ruta (
+    id_ruta INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
+    tiempo TIME NOT NULL,
+    estacion_inicial VARCHAR(50) NOT NULL,
+    estacion_final VARCHAR(50) NOT NULL,
+);
+
+CREATE TABLE estacion (
+    id_estacion INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE estacion_ruta (
+    id_estacion INT,
+    id_ruta INT,
+    FOREIGN KEY(id_estacion) REFERENCES estacion(id_estacion),
+    FOREIGN KEY(id_ruta) REFERENCES ruta(id_ruta)
+);
+
+CREATE TABLE conductor (
+    id_conductor INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
+);
+
+CREATE TABLE buses(
+    id_bus INT AUTO_INCREMENT PRIMARY KEY,
+    placa CHAR(1) NOT NULL,
+);
+
+CREATE TABLE recorrido (
+    id_conductor INT,
+    id_bus INT,
+    dia ENUM(1,2,3,4,5,6,7) NOT NULL,
+    id_ruta INT,
+    id_zona INT,
+    FOREIGN KEY(id_conductor) REFERENCES conductor(id_conductor),
+    FOREIGN KEY(id_bus) REFERENCES buses(id_bus),
+    FOREIGN KEY(id_ruta) REFERENCES ruta(id_ruta),
+    FOREIGN KEY(id_zona) REFERENCES zona(id_zona)
+);
+
+CREATE TABLE ruta_zona (
+    id_ruta INT,
+    id_zona INT,
+    FOREIGN KEY(id_ruta) REFERENCES ruta(id_ruta),
+    FOREIGN KEY(id_zona) REFERENCES zona(id_zona)
+);
+
+
+####POBLAMIENTO 2.0
+INSERT INTO zona(Zona) 
+VALUES 
+("Norte"),
+("Sur"),
+("Oriente"),
+("Occidente"),
+("Floridablanca"),
+("Girón"),
+("Piedecuesta");
+INSERT INTO ruta(nombre)
+VALUES
+("Universidades"),
+("Café Madrid"),
+("Cacique"),
+("Diamantes"),
+("Terminal"),
+("Prado"),
+("Cabecera"),
+("Ciudadela"),
+("Punta Estrella"),
+("Niza"),
+("Autopista"),
+("Lagos"),
+("Centro Florida");
+INSERT INTO estacion(nombre)
+VALUES 
+("Colseguros"),
+("Clínica Chicamocha"),
+("Plaza Guarín"),
+("Mega Mall"),
+("UIS"),
+("UDI"),
+("Santo Tomás"),
+("Boulevard Santander"),
+("Búcaros"), ("Rosita"),
+("Puerta del Sol"),
+("Cacique"),
+("Plaza Satélite"),
+("La Sirena"),
+("Provenza"),
+("Fontana"),
+("Gibraltar"),
+("Terminal"),
+("Mutis"),
+("Plaza Real");
+
+INSERT INTO buses(placa)
+VALUES
+("XVH345"),
+("XDL965"),
+("XFG847"),
+("XRJ452"),
+("XDF459"),
+("XET554"),
+("XKL688"),
+("XXL757");
+
+INSERT INTO conductor(nombre)
+VALUES
+("Andrés Manuel López Obrador"),
+("Nicolás Maduro Moros"),
+("Alberto Fernández"),
+("Luiz Inácio Lula da Silva"),
+("Gabriel Boric"),
+("Miguel Díaz-Canel"),
+("Daniel Ortega"),
+("Gustavo Petro Urrego"),
+("Luis Arce"),
+("Xiomara Castro");
+
+INSERT INTO RUTA (nombre, tiempo)
+VALUES 
+("Universidades", '2:00:00'), 
+("Café Madrid", '2:15:00'),
+("Cacique", '1:45:00'), 
+("Diamantes", '1:50:00'), 
+("Terminal", '2:00:00'), 
+("Prado", '1:30:00'), 
+("Cabecera", '2:00:00'), 
+("Ciudadela", '2:00:00'), 
+("Punta Estrella", '2:30:00'), 
+("Niza", '2:45:00'), 
+("Autopista", '2:15:00'), 
+("Lagos", '2:15:00'), 
+("Centro Florida", '2:30:00');
+
+
+INSERT INTO zona_ruta (id_zona,id_ruta)
+VALUES
+(1,1),
+(1,2),
+(4,4),
+(4,5),
+(5,10),
+(5,11),
+(5,12),
+(,),
+(,),
+(,);
+
+INSERT INTO estacion_ruta(id_estacion,id_ruta)
+VALUES
+(,),
