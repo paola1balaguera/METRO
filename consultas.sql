@@ -83,3 +83,8 @@ JOIN buses ON buses.id_bus = recorrido.id_bus
 WHERE ruta.tiempo > CAST('02:00:00' AS TIME);
 
 # 10. Nombres de Zonas y cantidad de rutas que tienen programadas (Contar)
+
+SELECT zona.nombre AS zona, COUNT(recorrido.id_ruta) AS rutasProgramas
+FROM zona
+JOIN recorrido ON recorrido.id_zona = zona.id_zona
+GROUP BY zona.id_zona;
